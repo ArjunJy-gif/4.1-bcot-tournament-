@@ -61,7 +61,11 @@ def register_individual():
         return
     
     name = input("Enter Competitor Name: ").strip().lower()
-    # Check for 'one event only' rule from the brief
+    
+    if not name:
+        print("Error: Name cannot be empty.")
+        return
+    
     single_event = input("Is this a ONE-EVENT only entry? (y/n): ").lower() == 'y'
     
     db["individuals"][name] = {"total_points": 0, "single_event": single_event}
@@ -82,7 +86,6 @@ def record_scores():
     print(f"\nRecording scores for: {DEFAULT_EVENTS[event_id]['name']}")
     target = input("Enter name of Participant to score: ").strip().lower()
     
-    # This is the Try/Except part for your 'Repair' evidence
     try:
         points = float(input("Enter Points earned: "))
         
